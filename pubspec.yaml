@@ -1,0 +1,56 @@
+name: bilsem_demo
+description: "BİLSEM Hafıza Geliştirme Uygulaması"
+publish_to: 'none'
+version: 1.0.0+6
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  audioplayers: ^6.0.0  
+  cupertino_icons: ^1.0.8
+  google_fonts: ^8.2.0
+  video_player: ^2.8.0
+  shared_preferences: ^2.5.5
+  in_app_purchase: ^3.2.0
+  provider: ^6.1.2
+  lottie: ^3.5.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/images/icons/
+    - assets/lottie/
+    - assets/sesler/
+    - assets/konular/
+    - assets/images/music/
+    - assets/images/icons/
+    - assets/images/tam_surum.jpg
+    - assets/images/denemeler/1_deneme/
+    - assets/images/denemeler/2_deneme/
+    - assets/images/denemeler/3_deneme/
+    - assets/images/denemeler/4_deneme/
+    - assets/images/bilsem_nedir/
+    - assets/images/matris/eksik_bulma/
+    - assets/images/matris/dondurme/
+    - assets/images/matris/ortak_nokta/
+    - assets/images/matris/birlesme/
+    - assets/images/matris/artma_azalma/
+    - assets/images/matris/kaydirma/
+    - assets/images/eksik_parca/
+    - assets/audio/
+    - assets/images/bilsem_demo_tablet.jpg
+    - assets/images/logo.png
+    - assets/images/home_page_background.jpg
+    - assets/images/sayi_hafizasi_background.jpg
+    - assets/images/sayi_hafizasi_background_2.jpg
+    - assets/images/matris_background.jpg # Yeni ana sayfa arka planımız
+    - assets/videos/start_screen.mp4
