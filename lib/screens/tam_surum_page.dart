@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart'; // EKLENDİ: Provider paketi
-import '../iap_provider.dart'; // EKLENDİ: IAP Provider dosyamızın yolu (klasör yapına göre düzeltmen gerekebilir)
+import 'package:provider/provider.dart'; 
+import '../iap_provider.dart'; 
 
 class TamSurumPage extends StatelessWidget {
   const TamSurumPage({super.key});
@@ -39,7 +39,7 @@ class TamSurumPage extends StatelessWidget {
                     width: double.infinity,
                     fit: BoxFit.fitWidth,
                   ),
-                  const SizedBox(height: 120), 
+                  const SizedBox(height: 150), // Butonlar için biraz daha yer açtık
                 ],
               ),
             ),
@@ -48,46 +48,74 @@ class TamSurumPage extends StatelessWidget {
             bottom: 32,
             left: 24,
             right: 24,
-            child: GestureDetector(
-              onTap: () {
-                // EKLENDİ: Butona tıklandığında Satın Alma tetiklenecek
-                context.read<IAPProvider>().buyPremium();
-              },
-              child: Container(
-                width: double.infinity,
-                height: 75,
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFFFFDF00), Color(0xFFD4AF37)],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
+            child: Column(
+              mainAxisSize: MainAxisSize.min, // Sadece içindekiler kadar yer kapla
+              children: [
+                // YENİ EKLENEN: İnce Kırmızı Geri Yükle Butonu
+                TextButton(
+                  onPressed: () {
+                    context.read<IAPProvider>().restorePremium();
+                  },
+                  style: TextButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+                    minimumSize: Size.zero,
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
-                  borderRadius: BorderRadius.circular(35),
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0xFFFFCA28).withOpacity(0.4),
-                      blurRadius: 15,
-                      offset: const Offset(0, 8),
-                    ),
-                    const BoxShadow(
-                      color: Color(0xFFB8860B),
-                      offset: Offset(0, 6),
-                      blurRadius: 0, 
-                    ),
-                  ],
-                ),
-                child: Center(
                   child: Text(
-                    "ŞİMDİ SATIN AL - 249 TL",
+                    "Satın Alımları Geri Yükle",
                     style: GoogleFonts.poppins(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w900,
-                      color: brandDarkBlue,
-                      letterSpacing: 1.2,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.red.shade700,
+                      decoration: TextDecoration.underline,
+                      decorationColor: Colors.red.shade700,
                     ),
                   ),
                 ),
-              ),
+                const SizedBox(height: 12), // İki buton arası boşluk
+                
+                // MEVCUT SATIN AL BUTONU
+                GestureDetector(
+                  onTap: () {
+                    context.read<IAPProvider>().buyPremium();
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 75,
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        colors: [Color(0xFFFFDF00), Color(0xFFD4AF37)],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                      ),
+                      borderRadius: BorderRadius.circular(35),
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color(0xFFFFCA28).withOpacity(0.4),
+                          blurRadius: 15,
+                          offset: const Offset(0, 8),
+                        ),
+                        const BoxShadow(
+                          color: Color(0xFFB8860B),
+                          offset: Offset(0, 6),
+                          blurRadius: 0, 
+                        ),
+                      ],
+                    ),
+                    child: Center(
+                      child: Text(
+                        "ŞİMDİ SATIN AL - 249 TL",
+                        style: GoogleFonts.poppins(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w900,
+                          color: brandDarkBlue,
+                          letterSpacing: 1.2,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],

@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart'; // Yerel hafıza ek
 class IAPProvider extends ChangeNotifier {
   final InAppPurchase _iap = InAppPurchase.instance;
   
-  // Google Play'de oluşturduğumuz ürün ID'si
+  // Google Play (ve ileride App Store) ürün ID'si
   final String _productId = 'bilsem_demo_tam_surum'; 
 
   bool isPremium = false;
@@ -19,7 +19,7 @@ class IAPProvider extends ChangeNotifier {
     isPremium = prefs.getBool('is_premium_user') ?? false;
     notifyListeners();
 
-    // 2. Google Play'den gelecek mesajları dinlemeye başla
+    // 2. Google Play/App Store'dan gelecek mesajları dinlemeye başla
     final Stream<List<PurchaseDetails>> purchaseUpdated = _iap.purchaseStream;
     _subscription = purchaseUpdated.listen((purchaseDetailsList) {
       _listenToPurchaseUpdated(purchaseDetailsList);
@@ -36,7 +36,7 @@ class IAPProvider extends ChangeNotifier {
       return;
     }
 
-    // 4. Kullanıcı silip yüklemişse diye Google'dan son durumu çek
+    // 4. Kullanıcı silip yüklemişse diye mağazadan son durumu çek (Otomatik kontrol)
     await _iap.restorePurchases();
   }
 
@@ -44,7 +44,7 @@ class IAPProvider extends ChangeNotifier {
     final ProductDetailsResponse response = await _iap.queryProductDetails({_productId});
     
     if (response.productDetails.isEmpty) {
-      debugPrint("HATA: Google Play'de $_productId ID'li ürün bulunamadı!");
+      debugPrint("HATA: Mağazada $_productId ID'li ürün bulunamadı!");
       return;
     }
     
@@ -52,6 +52,12 @@ class IAPProvider extends ChangeNotifier {
     final PurchaseParam purchaseParam = PurchaseParam(productDetails: productDetails);
     
     _iap.buyNonConsumable(purchaseParam: purchaseParam);
+  }
+
+  // APPLE İÇİN ZORUNLU EKLENEN MANUEL GERİ YÜKLEME FONKSİYONU
+  Future<void> restorePremium() async {
+    debugPrint("Manuel geri yükleme işlemi başlatıldı...");
+    await _iap.restorePurchases();
   }
 
   void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) async {
@@ -70,7 +76,7 @@ class IAPProvider extends ChangeNotifier {
           if (purchaseDetails.productID == _productId) {
             isPremium = true;
             
-            // BAŞARIYLA ALINDI! Bunu hemen telefonun hafızasına kazıyalım.
+            // BAŞARIYLA ALINDI VEYA GERİ YÜKLENDİ! Bunu hemen telefonun hafızasına kazıyalım.
             final prefs = await SharedPreferences.getInstance();
             await prefs.setBool('is_premium_user', true);
             
