@@ -22,6 +22,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
+  flutter_launcher_icons: ^0.13.1
 
 flutter:
   uses-material-design: true
@@ -48,9 +49,14 @@ flutter:
     - assets/images/eksik_parca/
     - assets/audio/
     - assets/images/bilsem_demo_tablet.jpg
-    - assets/images/logo.png
+    - assets/images/logo/logo.png
     - assets/images/home_page_background.jpg
     - assets/images/sayi_hafizasi_background.jpg
     - assets/images/sayi_hafizasi_background_2.jpg
     - assets/images/matris_background.jpg # Yeni ana sayfa arka planımız
     - assets/videos/start_screen.mp4
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logo/logo.png"
