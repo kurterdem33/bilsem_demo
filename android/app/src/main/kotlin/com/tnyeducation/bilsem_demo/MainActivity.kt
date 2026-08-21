@@ -1,4 +1,4 @@
-package com.tnyeducation.bilsem_demo
+package com.tnyeducation.bilsemdemo
 
 import io.flutter.embedding.android.FlutterActivity
 
