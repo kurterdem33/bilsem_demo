@@ -132,43 +132,28 @@ class GunlukTestSistemiPage extends StatelessWidget {
                     ),
                   ),
 
-                  // BÜYÜK ATEŞ VE GÜN SAYACI (GELİŞTİRİCİ HİLESİ BURADA)
-                  GestureDetector(
-                    onTap: () {
-                      // Gizli hile: Dokunulduğunda Provider'daki hile fonksiyonunu tetikler
-                      context.read<StreakProvider>().developerCheatAddStreak();
-                      
-                      ScaffoldMessenger.of(context).clearSnackBars();
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text("Hile Aktif! Seri: ${currentStreak + 1} | Rekor: ${highestStreak >= currentStreak + 1 ? highestStreak : currentStreak + 1}"),
-                          duration: const Duration(milliseconds: 500),
-                          backgroundColor: const Color(0xFF0F172A),
+                  // BÜYÜK ATEŞ VE GÜN SAYACI (Geliştirici hilesi tamamen kaldırıldı)
+                  SizedBox(
+                    height: 140, 
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Lottie.asset('assets/lottie/fire.json', fit: BoxFit.contain),
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const SizedBox(height: 35), 
+                            Text(
+                              "$currentStreak", 
+                              style: GoogleFonts.poppins(fontSize: 32, fontWeight: FontWeight.w900, color: Colors.black, height: 1.0),
+                            ),
+                            Text(
+                              "GÜN", 
+                              style: GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.black, height: 1.0),
+                            ),
+                          ],
                         ),
-                      );
-                    },
-                    child: SizedBox(
-                      height: 140, 
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Lottie.asset('assets/lottie/fire.json', fit: BoxFit.contain),
-                          Column(
-                           mainAxisSize: MainAxisSize.min,
-                            children: [
-                              const SizedBox(height: 35), 
-                              Text(
-                                "$currentStreak", 
-                                style: GoogleFonts.poppins(fontSize: 32, fontWeight: FontWeight.w900, color: Colors.black, height: 1.0),
-                              ),
-                              Text(
-                                "GÜN", 
-                                style: GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.black, height: 1.0),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                      ],
                     ),
                   ),
 

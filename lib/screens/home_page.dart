@@ -208,10 +208,10 @@ class HomePage extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      "TAM\nSÜRÜM\n249 TL",
+                      "TAM\nSÜRÜM",
                       textAlign: TextAlign.center,
                       style: GoogleFonts.poppins(
-                        fontSize: 16,
+                        fontSize: 18,
                         fontWeight: FontWeight.w900,
                         color: const Color(0xFF0F172A), 
                         height: 1.2,
